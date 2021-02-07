@@ -32,6 +32,7 @@
                         <!-- Search bar -->
                         <div class="sidebar-header">
                             <h4>Search for a City:</h4>
+                            <span id="error"></span>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" id="city-name" value ="" placeholder="City"
                                     aria-label="City" aria-describedby="button-addon2">
@@ -41,16 +42,21 @@
                         </div>
 
                         <!-- Listed Cities -->
-                        <ul class="search-bar">
-                            <li class="cities"> </li>
+                        <ul class="search-history" id="history">
+                            
                         </ul>
                     </nav>
                 </div>
 
                 <!-- Todays forecast -->
                 <div class="col-md-7" style="border: 1px solid slategray;" id="todays-weather">
-                    <h3 class="city-title">City Title and Date</h3>
-                    <ul class="weather-detail" Id="weather-detail">Enter weather detail here</ul>
+                    <h3  id ="city-title"></h3> 
+                    <div id ="icon"></div>
+                    <div id ="temp">Temperature: </div>
+                    <div id ="humidity">Humidity: </div>
+                    <div id ="windSpeed">Wind: </div>
+                    <div id ="uv-index">UV: </div>
+                    <ul class="weather-detail" Id="weather-detail"></ul>
                 </div>
 
                 <!-- Five day forecast -->
@@ -143,6 +149,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
         <script src="script.js"></script>
+        <!-- <script src="new.js"></script> -->
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
