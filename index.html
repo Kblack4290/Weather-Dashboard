@@ -21,35 +21,39 @@
         <div class="row">
             <div class="col-md-10" style="background-color: slategray; padding: 20px;">
 
-                <div class="header" > Weather Dashboard</div>
+                <div class="header"> Weather Dashboard</div>
             </div>
 
+            <!-- Sidebar -->
             <div class="row">
                 <div class="wrapper col-md-3" style="float: left; border: 1px solid slategrey; padding: 20px;">
-
-                    <!-- Sidebar -->
                     <nav id="sidebar">
+
+                        <!-- Search bar -->
                         <div class="sidebar-header">
                             <h4>Search for a City:</h4>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" id="city-name" placeholder="City" aria-label="City" aria-describedby="button-addon2">
-                                <button class="btn btn-outline-secondary" id="search-button" type="button" id="button-addon2">Search</button>
+                                <input type="text" class="form-control" id="city-name" value ="" placeholder="City"
+                                    aria-label="City" aria-describedby="button-addon2">
+                                <button class="btn btn-outline-secondary" id="search-button" type="button"
+                                    id="button-addon2">Search</button>
                             </div>
                         </div>
+
                         <!-- Listed Cities -->
                         <ul class="search-bar">
                             <li class="cities"> </li>
                         </ul>
-                        
                     </nav>
-
                 </div>
 
+                <!-- Todays forecast -->
                 <div class="col-md-7" style="border: 1px solid slategray;" id="todays-weather">
                     <h3 class="city-title">City Title and Date</h3>
-                    <ul class="weather-detail">Enter weather detail here</ul>
+                    <ul class="weather-detail" Id="weather-detail">Enter weather detail here</ul>
                 </div>
 
+                <!-- Five day forecast -->
                 <div class="five-day">
                     <div class="col-md-8">
                         <h3>5-Day Forecast</h3>
@@ -136,6 +140,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <script src="script.js"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
