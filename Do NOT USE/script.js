@@ -34,9 +34,11 @@ $(document).ready(function () {
             $.ajax({
 
                 dataType: "json",
-                url: "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=7&appid=4f648b539e1052f39292ff275c2bc4c2&units=imperial",
+                url: "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=4f648b539e1052f39292ff275c2bc4c2&units=imperial",
                 type: "GET",
-                cnt: "5",
+                data: {
+                    cnt:"5"
+                },
 
                 success: function fiveDay(data) {
                     console.log(data);
