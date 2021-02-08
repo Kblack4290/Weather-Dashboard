@@ -5,6 +5,8 @@ $(document).ready(function () {
 
 
         var city = $("#city-name").val();
+        var currentDate = moment().format('MMMM Do YYYY');
+
 
 
 
@@ -15,39 +17,79 @@ $(document).ready(function () {
                 type: "GET",
                 success: function (data) {
                     console.log(data);
+                    var iconCode = data.weather[0].icon;
+                    var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
 
-            
-
-                    $("#city-title").append(data.name + data.timezone);
-                    $("#icon").append(data.weather.icon);
-                    $("#temp").append(data.main.temp);
-                    $("#humidity").append(data.main.humidity);
-                    $("#windSpeed").append(data.wind.speed);
+                    $("#city-title").append(data.name + " " + currentDate);
+                    $("img").attr('src', iconUrl);
+                    $("#temp").append(data.main.temp + " F");
+                    $("#humidity").append(data.main.humidity + " %");
+                    $("#windSpeed").append(data.wind.speed + " MPH");
 
                     // window.localStorage.setItem(city, searchHistory); Local Storage
                 },
 
 
             });
-
             $.ajax({
 
                 dataType: "json",
-                url: "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=4f648b539e1052f39292ff275c2bc4c2&units=imperial",
+                url: "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=7&appid=4f648b539e1052f39292ff275c2bc4c2&units=imperial",
                 type: "GET",
+                cnt: "5",
+
                 success: function fiveDay(data) {
                     console.log(data);
+                    var weatherForecast = "";
 
-                    for (var i=1; i <= 5; i++){
+                    weatherForecast += "<h2>" + data.city.name + "</h2>";
 
-                        var day = data.list[i]
+                    $.each(data.list, function (index, val) {
+                        weatherForecast += "<p>" // Opening paragraph tag
+                        weatherForecast += "<b>Day " + index + "</b>: " // Day
+                        weatherForecast += val.main.temp + "&degF" // Temperature
+                        weatherForecast += "<span> | " + val.weather[0].description + "</span>"; // Description
+                        weatherForecast+= "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
+                        weatherForecast += "</p>" // Closing paragraph tag
+                    }); 
+                    $(".forecast").html(weatherForecast);
 
-                        
-                    }
+
+                    // for (var i = 1; i <= 5; i++) {
+
+                    //     var day = data.list[i];
+                    //     console.log([i]);
+
+                    //     var cardBody;
+                    //     var nextDay = new moment().add(i,'day');
+
+                    //     $(cardBody).append(nextDay.format('MMMM Do YYYY'));
+
+
+                    // }
 
                 }
 
             });
+
+            // var lat = data.coord.lat;
+            // var long = data.coord.lon;
+            // var uvIndex = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&appid=4f648b539e1052f39292ff275c2bc4c2&units=imperial"
+            // $.ajax({
+
+            //     dataType: "json",
+            //     type: "GET",
+            //     url: uvIndex,
+
+            //     success: function uvIndex(data) {
+
+
+
+            //         console.log(data);
+            //     }
+
+
+            // })
 
         } else {
             $("error").html("Please enter a City")
@@ -57,7 +99,7 @@ $(document).ready(function () {
 
 
 
-    });
+    }); 
 
 });
 
