@@ -37,7 +37,7 @@ $(document).ready(function () {
                 url: "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=4f648b539e1052f39292ff275c2bc4c2&units=imperial",
                 type: "GET",
                 data: {
-                    cnt:"5"
+                    cnt: "5"
                 },
 
                 success: function fiveDay(data) {
@@ -47,51 +47,33 @@ $(document).ready(function () {
                     weatherForecast += "<h2>" + data.city.name + "</h2>";
 
                     $.each(data.list, function (index, val) {
-                        weatherForecast += "<p>" // Opening paragraph tag
-                        weatherForecast += "<b>Day " + index + "</b>: " // Day
-                        weatherForecast += val.main.temp + "&degF" // Temperature
-                        weatherForecast += "<span> | " + val.weather[0].description + "</span>"; // Description
-                        weatherForecast+= "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
-                        weatherForecast += "</p>" // Closing paragraph tag
-                    }); 
-                    $(".forecast").html(weatherForecast);
+                        console.log(index);
+                        var columnDiv = $("<div>").addClass("col-2 ")
+                        var weatherCard = $("<div>").addClass("card-body bg-primary text-white ml-3 mb-3 rounded")
+                        var h5 = $("<h5>")
+                        var p = $("<p>")
+                        var temp = val.main.temp + "F" // Temperature
+                        var description = "<span> | " + val.weather[0].description + "</span>"; // Description
+                        var icon = $("<img>")
+                        h5.addClass("card-title")
+                        h5.text("Day " + index)
+                        p.addClass("card-text")
+                        icon.attr("src", "https://openweathermap.org/img/w/" + val.weather[0].icon + ".png")
+                        // var icon = "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>" // Icon
+                        p.text(temp, description)
+                        weatherCard.append(h5, p, icon)
+                        columnDiv.append(weatherCard)
+                        // $("#forecast").addClass("col forecast bg-primary text-white ml-3 mb-3 rounded")
+                        $("#forecast").append(columnDiv);
+                    });
 
 
-                    // for (var i = 1; i <= 5; i++) {
 
-                    //     var day = data.list[i];
-                    //     console.log([i]);
-
-                    //     var cardBody;
-                    //     var nextDay = new moment().add(i,'day');
-
-                    //     $(cardBody).append(nextDay.format('MMMM Do YYYY'));
-
-
-                    // }
-
+                    
                 }
 
             });
 
-            // var lat = data.coord.lat;
-            // var long = data.coord.lon;
-            // var uvIndex = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&appid=4f648b539e1052f39292ff275c2bc4c2&units=imperial"
-            // $.ajax({
-
-            //     dataType: "json",
-            //     type: "GET",
-            //     url: uvIndex,
-
-            //     success: function uvIndex(data) {
-
-
-
-            //         console.log(data);
-            //     }
-
-
-            // })
 
         } else {
             $("error").html("Please enter a City")
@@ -101,7 +83,7 @@ $(document).ready(function () {
 
 
 
-    }); 
+    });
 
 });
 
@@ -121,47 +103,4 @@ $(document).ready(function () {
 // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
 // WHEN I click on a city in the search history
 // THEN I am again presented with current and future conditions for that city
-// ```
-
-// var weatherData;
-// var fetchButton = document.getElementById('search-button')
-// var input;
-// var searchHistory = JSON.parse(window.localStorage.getItem('Search History'))
-
-// function weatherAPI() {
-
-//     var city = document.getElementById("city-name").value;
-//     var weatherApi = 'https://api.openweathermap.org/data/2.5/weather?q='
-//     var apiKey = '&appid=4f648b539e1052f39292ff275c2bc4c2&units=imperial'
-//     var requestData = weatherApi + city + apiKey;
-//     var cityHistory = document.querySelector("city-name")
-
-//     fetch(requestData)
-//         .then(function (response) {
-//             return response.json();
-//          }) //console.log(requestData)
-
-//         .then(function(data){
-
-//             console.log(data);
-//             for(var i=0; i<data; i++){
-//                 var cityTitle= document.createElement('h3');
-//                 var date = document.getElementById('date')
-//                 var todaysWeather = document.getElementById('todays-weather')
-
-//                 cityTitle.textContent = data[i].city;
-//                 console.log(name);
-//                 todaysWeather.append(cityTitle);
-
-//             }
-//         })
-
-
-
-// }
-
-
-
-
-
-// fetchButton.addEventListener('click', weatherAPI)
+// ``
